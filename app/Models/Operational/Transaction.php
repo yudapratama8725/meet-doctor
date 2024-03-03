@@ -34,4 +34,9 @@ class Transaction extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function appointment(){
+        //Belongs to terdapat 3 Parameter (Path Mdoel, Field Foreign Key, Field Primary Key From Table HasMany/HasOne)
+        return $this->belongsTo('App\Models\Operational\Appointment.php', 'appointment_id', 'id');
+    }
 }

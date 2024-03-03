@@ -34,4 +34,22 @@ class Appointment extends Model
         'updated_at',
         'deleted_at',
     ];
+    
+    //One to Many
+    public function doctor(){
+        //Belongs to terdapat 3 Parameter (Path Mdoel, Field Foreign Key, Field Primary Key From Table HasMany/HasOne)
+        return $this->belongsTo('App\Models\Operational\Doctor.php', 'doctor_id', 'id');
+    }
+
+    public function transaction(){
+        return$this->hasOne('App\Models\Operational\Transaction.php', 'appointment_id');
+    }
+
+    public function consultation(){
+        return $this->belongsTo('App\Models\MasterData\Consultation.php', 'consultation_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User.php', 'user_id', 'id');
+    }
 }

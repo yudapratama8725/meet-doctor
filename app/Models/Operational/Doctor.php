@@ -31,4 +31,13 @@ class Doctor extends Model
         'updated_at',
         'deleted_at',
     ];
+    //One to Many
+    public function specialist(){
+        //Belongs to terdapat 3 Parameter (Path Mdoel, Field Foreign Key, Field Primary Key From Table HasMany/HasOne)
+        return $this->belongsTo('app\Models\MasterData\Specialist.php', 'specialist_id', 'id');
+    }
+
+    public function appointment(){
+        return $this->hasMany('App\Models\Operational\Appointment.php', 'doctor_id');
+    }
 }

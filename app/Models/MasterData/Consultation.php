@@ -28,4 +28,9 @@ class Consultation extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    //One to Many
+    public function appointment(){
+        return $this->hasMany('App\Models\MasterData\Consultation.php', 'consultation_id');
+    }
 }
