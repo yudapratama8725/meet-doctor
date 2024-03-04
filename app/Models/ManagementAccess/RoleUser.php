@@ -33,4 +33,8 @@ class RoleUser extends Model
     public function user(){
         return $this->belongsTo('App\Models\User.php', 'user_id', 'id');
     }
+
+    public function role(){
+        return $this->belongsTo('App\Models\ManagementAccess\Role.php', 'role_id', 'id');
+    }
 }

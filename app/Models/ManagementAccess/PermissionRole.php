@@ -29,4 +29,12 @@ class PermissionRole extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function permission(){
+        return $this->belongsTo('App\Models\ManagementAccess\Permission.php', 'permission_id', 'id');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Models\ManagementAccess\Role.php', 'role_id','id');
+    }
 }
