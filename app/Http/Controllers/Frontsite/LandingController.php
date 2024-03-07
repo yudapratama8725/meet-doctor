@@ -25,12 +25,6 @@ class LandingController extends Controller
      * Display a listing of the resource.
      */
 
-    // function yang pertama kali dijalankan pada landing
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         return view('pages.frontsite.landing-page.index');
