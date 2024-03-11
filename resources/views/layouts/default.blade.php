@@ -3,7 +3,10 @@
   <head>
     @include('includes.frontsite.meta');
 
+    <link rel="shortcut icon" href="{{ asset('/asset/frontsite/images/logo.png') }}" type="image/x-icon">
+
     <title>@yield('title') | Meet-Doctor</title>
+
 
     @stack('before-style')
         @include('includes.frontsite.style')
