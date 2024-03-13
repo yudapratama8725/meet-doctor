@@ -16,8 +16,7 @@
                     <ul class="menu-content">
                         {{-- @can('permission_access') --}}
                             <li class="{{ request()->is('backsite/permission') || request()->is('backsite/permission/*') || request()->is('backsite/*/permission') || request()->is('backsite/*/permission/*') ? 'active' : '' }} ">
-                                {{-- {{ route('backsite.permission.index') }} --}}
-                                <a class="menu-item" href="">
+                                <a class="menu-item" href="{{ route('backsite.permission.index') }}">
                                     <i></i><span>Permission</span>
                                 </a>
                             </li>
