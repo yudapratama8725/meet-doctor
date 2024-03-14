@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 //Request
-use App\Requests\Specialist\Backsite\StoreSpecialistRequest;
-use App\Requests\Specialist\Backsite\UpdateSpecialistRequest;
+use App\Requests\Specialist\StoreSpecialistRequest;
+use App\Requests\Specialist\UpdateSpecialistRequest;
 
 //use everything
-//use Gate;
+use Gate;
 use Auth;
 
 //model here
@@ -34,6 +34,8 @@ class SpecialistController extends Controller
      */
     public function index()
     {
+        // abort_if(Gate::denies('specialist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $specialist = Specialist::orderBy('created_at', 'desc')->get();
 
         return view('pages.backsite.master-data.specialist.index', compact('specialist'));
@@ -55,6 +57,10 @@ class SpecialistController extends Controller
         //Get all Request from frontsite
         $data = $request->all();
 
+        // re format before push to table
+        $data['price'] = str_replace(',', '', $data['price']);
+        $data['price'] = str_replace('IDR ', '', $data['price']);
+
         //Store to database
         $specialist = Specialist::create($data);
 
@@ -67,6 +73,8 @@ class SpecialistController extends Controller
      */
     public function show(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.master-data.specialist.show', compact('specialist'));
     }
 
@@ -75,6 +83,8 @@ class SpecialistController extends Controller
      */
     public function edit(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.master-data.specialist.edit', compact('specialist'));
     }
 
@@ -85,6 +95,9 @@ class SpecialistController extends Controller
     {
         //get all request from frontsite
         $data = $request->all();
+
+        $data['price'] = str_replace(',', '', $data['price']);
+        $data['price'] = str_replace('IDR ', '', $data['price']);
 
         //update to database
         $specialist->update($data);
@@ -98,6 +111,8 @@ class SpecialistController extends Controller
      */
     public function destroy(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $specialist->forceDelete();
 
         alert()->success('Success Message', 'Successfully deleted specialist');

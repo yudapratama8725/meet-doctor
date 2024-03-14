@@ -23,24 +23,21 @@
                         {{-- @endcan --}}
                         {{-- @can('role_access') --}}
                             <li class="{{ request()->is('backsite/role') || request()->is('backsite/role/*') || request()->is('backsite/*/role') || request()->is('backsite/*/role/*') ? 'active' : '' }} ">
-                                {{-- {{ route('backsite.role.index') }} --}}
-                                <a class="menu-item" href="">
+                                <a class="menu-item" href="{{ route('backsite.role.index') }}">
                                     <i></i><span>Role</span>
                                 </a>
                             </li>
                         {{-- @endcan --}}
                         {{-- @can('type_user_access') --}}
                             <li class="{{ request()->is('backsite/type_user') || request()->is('backsite/type_user/*') || request()->is('backsite/*/type_user') || request()->is('backsite/*/type_user/*') ? 'active' : '' }} ">
-                                {{-- {{ route('backsite.type_user.index') }} --}}
-                                <a class="menu-item" href="">
+                                <a class="menu-item" href="{{ route('backsite.type_user.index') }}">
                                     <i></i><span>Type User</span>
                                 </a>
                             </li>
                         {{-- @endcan --}}
                         {{-- @can('user_access') --}}
                             <li class="{{ request()->is('backsite/user') || request()->is('backsite/user/*') || request()->is('backsite/*/user') || request()->is('backsite/*/user/*') ? 'active' : '' }} ">
-                                {{-- {{ route('backsite.user.index') }} --}}
-                                <a class="menu-item" href="">
+                                <a class="menu-item" href="{{ route('backsite.user.index') }}">
                                     <i></i><span>User</span>
                                 </a>
                             </li>

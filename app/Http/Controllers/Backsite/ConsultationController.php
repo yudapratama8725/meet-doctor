@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 //Request
-use App\Requests\Consultation\StoreConsultationRequest;
-use App\Requests\Consultation\UpdateConsultationRequest;
+use App\Http\Requests\Consultation\StoreConsultationRequest;
+use App\Http\Requests\Consultation\UpdateConsultationRequest;
 
 //use everything
-//use Gate;
+use Gate;
 use Auth;
 
 //model here
@@ -34,6 +34,8 @@ class ConsultationController extends Controller
      */
     public function index()
     {
+        // abort_if(Gate::denies('consultation_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $consultation = Consultation::orderBy('created_at', 'desc')->get();
 
         return view ('pages.backsite.master-data.consultation.index', compact('consultation'));
@@ -67,6 +69,8 @@ class ConsultationController extends Controller
      */
     public function show(Consultation $consultation)
     {
+        abort_if(Gate::denies('consultation_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.master-data.consultation.show', compact('consultation'));
     }
 
@@ -75,7 +79,9 @@ class ConsultationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        abort_if(Gate::denies('consultation_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('pages.backsite.master-data.consultation.edit', compact('consultation'));
     }
 
     /**
@@ -84,7 +90,7 @@ class ConsultationController extends Controller
     public function update(UpdateConsultationRequest $request, Consultation $consultation)
     {
         //get all request from frontsite
-        $data = request->all();
+        $data = $request->all();
 
         //update to database
         $consultation->update($data);
@@ -98,6 +104,8 @@ class ConsultationController extends Controller
      */
     public function destroy(Consultation $consultation)
     {
+        abort_if(Gate::denies('consultation_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $consultation->forceDelete();
 
         alert()->success('Success Message', 'Successfully deleted consultation');
