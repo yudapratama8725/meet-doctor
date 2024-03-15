@@ -71,16 +71,32 @@ class User extends Authenticatable
 
     // Melakukan FK
 
-    public function appointment(){
-        return $this->hasMany('App\Models\Operational\Appointment.php', 'user_id');
-    }
+   // many to many
+   public function role()
+   {
+       return $this->belongsToMany('App\Models\ManagementAccess\Role');
+   }
 
-    public function detail_user(){
-        return $this->hasOne('App\Models\ManagementAccess\DetailUser.php', 'user_id');
-    }
+   // one to one
+   public function detail_user()
+   {
+       return $this->hasOne('App\Models\ManagementAccess\DetailUser', 'user_id');
+   }
 
-    public function role_user(){
-        return $this->hasMany('App\Models\ManagementAccess\RoleUser.php', 'user_id');
-    }
+   // one to many
+   public function role_user()
+   {
+       return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'user_id');
+   }
+
+   public function doctor()
+   {
+       return $this->hasOne('App\Models\Operational\Doctor', 'user_id');
+   }
+
+   public function appointment()
+   {
+       return $this->hasMany('App\Models\Operational\Appointment', 'user_id');
+   }
 
 }
