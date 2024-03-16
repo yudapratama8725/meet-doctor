@@ -34,14 +34,14 @@ class DetailUser extends Model
         'deleted_at',
     ];
     
-    //One to Many
-    public function type_user(){
-        //Belongs to terdapat 3 Parameter (Path Mdoel, Field Foreign Key, Field Primary Key From Table HasMany/HasOne)
-        return $this->belongsTo('app\Models\MasterData\TypeUser.php', 'type_user_id', 'id');
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-    public function user(){
-        return $this->belongsTo('App\Models\User.php', 'user_id', 'id');
+    public function type_user()
+    {
+        return $this->belongsTo('App\Models\MasterData\TypeUser', 'type_user_id', 'id');
     }
 
 }

@@ -29,11 +29,25 @@ class Role extends Model
         'deleted_at',
     ];
 
-    public function permission_role(){
-        return $this->hasMany('App\Models\ManagementAccess\PermissionRole.php', 'role_id');
+    // many to many
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
     }
 
-    public function role_user(){
-        return $this->hasMany('App\Models\ManagementAccess\RoleUser.php', 'role_id');
+    public function permission()
+    {
+        return $this->belongsToMany('App\Models\ManagementAccess\Permission');
+    }
+
+    // one to many
+    public function role_user()
+    {
+        return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'role_id');
+    }
+
+    public function permission_role()
+    {
+        return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'role_id');
     }
 }

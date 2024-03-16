@@ -37,7 +37,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $role = Role::orderBy('created_at', 'desc')->get();
 
@@ -61,7 +61,7 @@ class RoleController extends Controller
         $data = $request->all();
 
         //Store to database
-        $role = Consultation::create($data);
+        $role = Role::create($data);
 
         alert()->success('Success Message', 'Successfully added new role');
         return redirect()->route('backsite.role.index');

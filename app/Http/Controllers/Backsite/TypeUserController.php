@@ -30,7 +30,7 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('type_user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('type_user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $type_user = TypeUser::all();
 

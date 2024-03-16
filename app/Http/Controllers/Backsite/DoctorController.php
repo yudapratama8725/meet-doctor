@@ -39,7 +39,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('doctor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('doctor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // for table grid
         $doctor = Doctor::orderBy('created_at', 'desc')->get();

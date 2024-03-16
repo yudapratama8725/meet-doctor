@@ -34,7 +34,7 @@ class SpecialistController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('specialist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('specialist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $specialist = Specialist::orderBy('created_at', 'desc')->get();
 
